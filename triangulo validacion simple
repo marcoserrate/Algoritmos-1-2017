@@ -1,0 +1,30 @@
+// llll.cpp : Defines the entry point for the console application.
+//Autor:Marco Serrate
+
+#include "stdafx.h"
+#include<iostream>
+#include"conio.h"
+#include "stdlib.h"
+using namespace std;
+void main()
+{ system("color 2"); 
+	 float area,base,altura; // Declaración de variables
+   // Ingreso de datos con mensaje y solicitud de datos
+
+	 cout<<"Ingrese base: ";
+	 cin>>base;
+	
+   cout<<"Ingrese altura: ";
+   cin>>altura;
+ if((base>0)&&(altura>0))
+	{	   area=(base*altura)/2;
+ cout<<"El area es: "<<area;
+ }
+ else
+	 cout<<"error";
+
+   // Salida de la respuesta o resultado
+   
+getch(); // Detiene la pantalla
+}
+
