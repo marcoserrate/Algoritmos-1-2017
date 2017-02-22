@@ -1,0 +1,29 @@
+// algori.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include"conio.h"
+
+using namespace std;
+void main()
+{
+	int a,x,y,b,c,d,e,respx,respy,respuey,respuex,lay,lax;
+		cout<<"  aX+bY=c"<<endl;
+		cout<<"  dX+eY=d"<<endl;
+			     
+	cout<<"introducir el valor de a,b,c,d,e :"<<endl;
+	cin>>a>>b>>c>>d>>e;
+	respx=(c-b)/a;
+	respuey= c/(respx+b);
+	 lay=(d*respuey)+e-d;
+	  cout<<"y="<<lay<<endl;
+	  lax=a+(b*lay)-c;
+	  cout<<"x="<<lax<<endl;
+
+
+
+
+	  getch();
+}
+
