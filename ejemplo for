@@ -1,0 +1,22 @@
+// repetir.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+ 
+using namespace std;
+
+void main()
+{
+	int x,n,r;
+	cout<<"introducir un numero entero a multiplicarse por si mismo: "<<endl;
+	cin>>x;
+	cout<<"introducir veces a multiplicar el numero: "<<endl;
+	cin>>n;
+	for(int i=0;i<=n;i++)
+	r=x*i;
+	cout<<r;
+	getch();
+}
+
