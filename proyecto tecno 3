@@ -1,0 +1,316 @@
+#include "stdafx.h"
+#include <string>
+#include "conio.h"
+#include <iostream> 
+#include "stdlib.h"
+struct tipo_registro
+{ 
+int nombre; 
+char descrip[30]; 
+int cantidad; 
+float precio; 
+char lugar; 
+};
+struct tipo_registro Registro;
+FILE *alias;
+
+using namespace std;
+void ALTA_SECUENCIAL(void ) ;
+void LISTADO_SECUENCIAL(void) ;
+void MODIFICACION_SECUENCIAL(void) ;
+void CONSULTA_SECUENCIAL(void) ;
+void BAJA_LOGICA_SECUENCIAL(void);
+
+
+void main()
+{	
+	int opcion, op,op1,op2,op3,op4,op5;
+	do {		system("cls");
+		cout<<"                                      >>> MENU <<<"<<endl;
+		cout<<" 1.-introducir sintomas "  << "                         3.-Farmacias con mayor stock de medicinas" << endl;
+		cout<< " 2.-medicinas(listado,altas de medicinas,consulta)" <<  "               4.-Enfermedades posibles  " << endl;
+		cin>> op;
+		switch (op){
+		case 1:cout << "¿Que sintoma principal tiene?"<<endl;
+			cout<<"1.-Dolor de cabeza"<<endl;
+			cout<<"2.-Dolor de estomago"<<endl;
+			cout<<"3.-Dolor de articulaciones"<<endl;
+			cout<<"4.-Dolor de cuerpo"<<endl;
+			cout<<"5.-Comeson"<<endl;
+			cin>>op1;
+			switch(op1){
+			case 1:system("cls");
+				cout<<"¿que tipo de dolor de cabeza tiene?"<<endl;
+				cout<<"1.-Dolor de cabeza leve(poco dolor)"<<endl;
+				cout<<"2.-Dolor de tipo migraña(puede ocurrir con síntomas como náuseas, vómitos o sensibilidad a la luz y al sonido)"<<endl;
+				cout<<"3.-Dolor de tipo ´Cafelea en brotes´(afecta un lado de la cabeza puede tener  lagrimeo de los ojos, párpados caídos y congestión nasal)"<<endl;
+			cin>>op2;
+				switch(op2){system("cls");
+				case 1:
+					cout<<"Un dolor de cabeza con dolor o molestia leve en la cabeza, el cuero cabelludo o el cuello."<<endl;
+					cout<<"Usted puede tener un dolor de cabeza leve con el resfriado común, la gripe u otras enfermedades virales "<<endl;
+					cout<<"cuando también tenga una fiebre baja."<<endl;
+					cout<<"       MEDICINAS Y TRATAMIENTOS"<<endl;
+					cout<<"Los analgésicos como el acetaminofen (una marca: Children’s Tylenol)"<<endl;
+					cout<<"pueden ayudar a aliviar los dolores de cabeza, los dolores musculares y los dolores de garganta, así como también tratar la fiebre"<<endl;
+					cout<<"tambien pueden usarse otros medicamentos como ser migradolalgial o aspirinas las cuales pueden ser adquiridas en las mejores"<<endl;
+					cout<<"farmacias como ser farmacias chavez y farmacorp ";
+						break;
+				case 2:system("cls");
+					cout<<"Es un tipo de dolor de cabeza que puede ocurrir con sintomas como náuseas, vomitos o sensibilidad a la luz y al sonido."<<endl;
+					  cout<<"En muchas personas, se siente un dolor pulsatil unicamente en un lado de la cabeza."<<endl;
+					  cout<<"Otros sintomas que se pueden presentar con los dolores de cabeza incluyen:"<<endl;
+ cout<<"Escalofríos"<<endl;
+ cout<<"Aumento de la micción"<<endl;
+ cout<<"Fatiga"<<endl;
+ cout<<"Inapetencia"<<endl;
+ cout<<"Náuseas y vómitos"<<endl;
+ cout<<"Sudoración"<<endl;
+					  cout<<" MEDICINAS Y TRATAMIENTO"<<endl;
+					 cout<<"  Antidepresivos"<<endl;
+cout<<" Medicinas para la presión arterial"<<endl;
+cout<<" Medicinas anticonvulsivos"<<endl;
+getch();
+break;
+
+			}
+
+				break;
+			}
+		case 2:{
+	   cout << " MENU MEDICINAS" << endl;
+		cout << " 1.-introducir tipo de medicina " << endl;
+		cout << " 2.-listado de medicinas" << endl;
+		cout << " 3.-modificacion" << endl;
+		cout << "4.- consulta" << endl;
+		cout << " 5.-borrado" << endl;
+cin >> opcion;
+	 switch(opcion){
+		 case 1: ALTA_SECUENCIAL();
+	            break;
+		 case 2: LISTADO_SECUENCIAL();
+			 break;
+		 case 3: MODIFICACION_SECUENCIAL();
+			 break;
+		 case 4: CONSULTA_SECUENCIAL();
+			 break;
+		 case 5: BAJA_LOGICA_SECUENCIAL();
+			 break;
+		 default: cout<<"error";
+			 break;
+}
+		 
+	break;}
+		case 3:cout << "Las farmacias con mas amplio stock en medicinas son:";
+			break;
+		}
+	} while (opcion != 0);
+_getch;
+}
+void ALTA_SECUENCIAL(void ) 
+{ 
+  int nombre;  // Variable local para el numero de producto 
+  system("cls"); 
+  cout << "\n\rREGISTRO DE MEDICINAS NUEVAS"; 
+  alias=fopen("PRODUCTO.SEC","rb+"); // Intenta abrir el archivo  
+                                     // en modo de lectura/escritura 
+  if(alias==NULL) 
+    alias=fopen("PRODUCTO.SEC","wb"); // Crea el archivo en caso de no 
+                                      // existir 
+  cout << "\n\n\n\rNumero de identificacion: ";  cin>>nombre;
+  fread(&Registro,sizeof(Registro),1,alias); 
+  // Lee el "Registro", de tamano=sizeof(Registro) del archivo "alias" 
+  while(!feof(alias)) // Ciclo mientras no se encuentre el final del 
+                      // archivo 
+  { 
+  
+	  if (Registro.nombre==nombre )
+    { 
+       cout << "\n\n\n\rRegistro duplicado !!!"; 
+       fclose(alias); 
+       getch(); 
+       return; 
+    } 
+    fread(&Registro,sizeof(Registro),1,alias); 
+  } 
+  cin.ignore();
+  cout << "\n\rNombre y descripcion: "; gets(Registro.descrip); 
+  cout << "\n\rCantidad   : "; cin >> Registro.cantidad; 
+  cout << "\n\rPrecio     : "; cin >> Registro.precio; 
+  cout << "\n\rLugar donde conseguir: "; cin>>Registro.lugar;
+  
+  Registro.nombre==nombre; 
+  fwrite(&Registro,sizeof(Registro),1,alias); // Grabar el Registro  
+  fclose(alias); // Cierra el archivo 
+  cout << "\n\n\n\rMedicina  registrada !!!"; 
+  cout << "\n\r<<< Oprima cualquier tecla para continuar >>>"; 
+  getch(); 
+  return;
+} 
+void LISTADO_SECUENCIAL(void) 
+{ 
+  system("cls"); 
+  cout << "\n\rLISTADO DE REGISTROS DE PRODUCTOS"; 
+  alias=fopen("PRODUCTO.SEC","rb"); // Intenta abrir el archivo 
+
+	if(alias==NULL) // en modo de solo lectura 
+  { 
+    cout << "\n\n\n\rNo existe el archivo !!!"; 
+    cout << "\n\r<<< Oprima cualquier tecla para continuar >>>"; 
+    getch(); 
+    return; 
+  } 
+  cout << "\n\rNumero id               Nombre y Descripcion  Cantidad        Precio  Lugar  "; 
+  cout << "\n\r-----------------------------------------------------------------------"; 
+  fread(&Registro,sizeof(Registro),1,alias); 
+     // Lee el "Registro", de tamano=sizeof(Registro) del archivo "alias"
+  while(!feof(alias)) // Ciclo mientras no se encuentre el final del 
+
+  { 
+printf("\n\r%3d\t%30s\t%3d\t\t$%4.2f\t%c",Registro.nombre,Registro.descrip,Registro.cantidad,Registro.precio,Registro.lugar); 
+    fread(&Registro,sizeof(Registro),1,alias); 
+  } 
+  fclose(alias); // Cierra el archivo 
+  cout << "\n\r------------------------------------------------------------------------"; 
+  cout << "\n\rFin del listado !!!"; 
+  cout << "\n\r<<< Oprima cualquier tecla para continuar >>>"; 
+  getch(); 
+  return; 
+}
+void MODIFICACION_SECUENCIAL(void) 
+{ 
+ int nombre; // Variable local para el numero de producto que desea 
+
+  system("cls"); 
+  cout << "\n\rMODIFICACION DE REGISTROS DE MEDICINAS"; 
+  alias=fopen("PRODUCTO.SEC","rb+"); // Intenta abrir el archivo 
+
+                             // en modo de lectura/escritura 
+  if(alias==NULL)  // Valida la existencia del archivo 
+  { 
+    cout << "\n\n\n\rNo existe el archivo !!!"; 
+    cout << "\n\r<<< Oprima cualquier tecla para continuar >>>"; 
+    getch(); 
+    return; 
+  } 
+  cout << "\n\n\n\rnumero de id de medicina: ";cin>>nombre;
+  fread(&Registro,sizeof(Registro),1,alias); 
+     // Lee el "Registro", de tamano=sizeof(Registro) del archivo "alias"
+  while(!feof(alias)) // Ciclo mientras no se encuentre el final del archivo 
+  { 
+    if (Registro.nombre==nombre )
+    { 
+      cout << "\n\rNumero                   Descripcion  Cantidad       Precio  Luagr"; 
+      cout << "\n\r------------------------------------------------------------------------"; 
+printf("\n\r%3d\t%30s\t%3d\t\t$%4.2f\t%c",Registro.nombre,Registro.descrip,Registro.cantidad,Registro.precio,Registro.lugar); 
+      cout << "\n\n\n\rAnote los nuevos datos ..."; 
+      cout << "\n\rDescripcion: "; gets(Registro.descrip); 
+      cout << "\n\rCantidad   : "; cin >> Registro.cantidad; 
+      cout << "\n\rPrecio     : "; cin >> Registro.precio; 
+      cout << "\n\rLugar   : "; Registro.lugar=toupper(getche()); 
+    
+      // Es necesario reposicionar el apuntador del archivo al principio 
+	}
+  }
+}
+void CONSULTA_SECUENCIAL(void) 
+{ 
+int nombre;
+  system("cls"); 
+  cout << "\n\rCONSULTA DE REGISTROS DE PRODUCTOS"; 
+  alias=fopen("PRODUCTO.SEC","rb"); // Intenta abrir el archivo 
+
+                             // en modo de solo lectura 
+  if(alias==NULL) 
+  { 
+    cout << "\n\n\n\rNo existe el archivo !!!"; 
+    cout << "\n\r<<< Oprima cualquier tecla para continuar >>>"; 
+    getch(); 
+    return; 
+  } 
+  cout << "\n\n\n\rNumero de producto: ";  cin>>nombre;
+  fread(&Registro,sizeof(Registro),1,alias); 
+  // Lee el "Registro", de tamano=sizeof(Registro) del archivo "alias" 
+  while(!feof(alias))  
+  { 
+    if (Registro.nombre==nombre)
+    { 
+      cout << "\n\rNumero id                 Descripcion  Cantidad       Precio     Garantia"; 
+      cout << "\n\r------------------------------------------------------------------------"; 
+printf("\n\r%3d\t%30s\t%3d\t\t$%4.2f\t%c",Registro.nombre,Registro.descrip,Registro.cantidad,Registro.precio,Registro.lugar); 
+      fclose(alias); 
+      cout << "\n\r<<< Oprima cualquier tecla para continuar >>>"; 
+      getch(); 
+      return; 
+    } 
+    fread(&Registro,sizeof(Registro),1,alias); 
+  } 
+  cout << "\n\rNo se encuentra ese registro !!!"; 
+  fclose(alias); // Cierra el archivo 
+  cout << "\n\r<<< Oprima cualquier tecla para continuar >>>"; 
+  getch(); 
+  return; 
+}
+void BAJA_LOGICA_SECUENCIAL(void) 
+{ 
+  int nombre; // Variable local para el numero de producto que desea eliminar 
+  char op; //Variable local 
+ system("cls"); 
+  cout << "\n\rBAJAS LOGICAS DE MEDICINAS"; 
+  alias=fopen("PRODUCTO.SEC","rb+"); // Intenta abrir el archivo PRODUCTO.SEC 
+                             // en modo de lectura/escritura 
+  if(alias==NULL)  // Valida la existencia del archivo 
+  { 
+    cout << "\n\n\n\rNo existe el archivo !!!"; 
+    cout << "\n\r<<< Oprima cualquier tecla para continuar >>>"; 
+    getch(); 
+    return; 
+  } 
+  cout << "\n\n\n\rNumero de medicina: "; cin>>nombre;
+  fread(&Registro,sizeof(Registro),1,alias); 
+     // Lee el "Registro", de tamano=sizeof(Registro) del archivo "alias"
+  while(!feof(alias)) // Ciclo mientras no se encuentre el final del 
+ 
+  { 
+    if (Registro.nombre==nombre )
+    { 
+      cout << "\n\rNumero id                    Descripcion  Cantidad       Precio  Lugar"; 
+      cout << "\n\r------------------------------------------------------------------------"; 
+printf("\n\r%3d\t%30s\t%3d\t\t$%4.2f\t%c",Registro.nombre,Registro.descrip,Registro.cantidad,Registro.precio,Registro.lugar); 
+       Registro.nombre=0;  
+      strcpy(Registro.descrip,""); 
+      Registro.cantidad=0; 
+      Registro.precio=0.0; 
+      Registro.lugar=' '; 
+      do { 
+        cout << "\n\n\rEsta seguro que desea borrarlo? [S/N] ---> "; 
+        op=toupper(getch()); 
+      }while(op!='S' && op!='N'); 
+      if(op=='S') 
+		        { 
+       // Es necesario reposicionar el apuntador del archivo al principio 
+
+       // registro que desea modificar, ya que al leer un registro, el 
+       // apuntador se posiciona en el registro siguiente 
+       // La funcion ftell(alias) devuelve la posicion donde se encuentra 
+
+       // apuntador 
+            fseek(alias,ftell(alias)-sizeof(Registro),SEEK_SET);      
+       fwrite(&Registro,sizeof(Registro),1,alias);  // Graba el registro 
+ 
+                                       // los nuevos campos 
+       cout<<"\n\n\n\rRegistro eliminado !!!"; 
+      } 
+      fclose(alias);   // Cierra el archivo 
+      cout << "\n\r<<< Oprima cualquier tecla para continuar >>>"; 
+      getch(); 
+      return; 
+    } 
+    fread(&Registro,sizeof(Registro),1,alias); 
+  } 
+  cout << "\n\rNo se encuentra ese registro !!!"; 
+  fclose(alias); // Cierra el archivo 
+  cout << "\n\r<<< Oprima cualquier tecla para continuar >>>"; 
+  getch(); 
+  return; 
+}
